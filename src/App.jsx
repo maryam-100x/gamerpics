@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import * as THREE from "three";
 
-const CONTRACT = "Soon"; 
+const CONTRACT = "Bh2HShw6sAbyhWpvfeiSEpwfan2ySDAX9HEDYAdHpump"; 
 
 const LINKS = {
   x: "https://x.com/GamerPicSOL",
