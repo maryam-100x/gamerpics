@@ -6,6 +6,10 @@ body {
   overflow: hidden;
   width: 100vw;
   height: 100vh;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 .animated-bg {
@@ -34,15 +38,21 @@ body {
   position: relative;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 .dash {
   display: grid;
-  grid-template-columns: 240px 240px 240px 240px;
-  grid-template-rows: 140px 140px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
   gap: 12px;
   position: relative;
   z-index: 10;
+  width: 90vw;
+  max-width: 1000px;
+  height: 50vh;
+  max-height: 300px;
+  margin: 0 auto;
 }
 
 .tile {
@@ -62,6 +72,8 @@ body {
   text-decoration: none;
   position: relative;
   backdrop-filter: blur(1px);
+  width: 100%;
+  height: 100%;
 }
 
 .tile:hover { 
@@ -73,7 +85,7 @@ body {
 
 /* text overlay style */
 .tileText {
-  font-size: 48px;
+  font-size: clamp(24px, 5vw, 48px);
   font-weight: 700;
   color: white;
   text-shadow: 0 2px 4px rgba(0,0,0,0.8);
@@ -82,7 +94,7 @@ body {
 }
 
 .tileText.small {
-  font-size: 18px;
+  font-size: clamp(14px, 3vw, 18px);
   text-align: center;
   line-height: 1.3;
 }
@@ -130,6 +142,8 @@ body {
   animation: toast 2.4s ease forwards;
   box-shadow: 0 4px 12px rgba(0,0,0,.3);
   z-index: 100;
+  font-size: clamp(14px, 3vw, 16px);
+  white-space: nowrap;
 }
 
 @keyframes toast {
@@ -151,7 +165,7 @@ body {
   align-items: center;
   z-index: 9999;
   opacity: 1;
-  transition: opacity 0.5s ease; /* Smooth fade */
+  transition: opacity 0.5s ease;
 }
 
 .startup-overlay.fade {
@@ -169,8 +183,8 @@ body {
   position: fixed;
   top: 20px;
   right: 20px;
-  width: 60px;
-  height: 60px;
+  width: clamp(40px, 10vw, 60px);
+  height: clamp(40px, 10vw, 60px);
   border-radius: 8px;
   overflow: hidden;
   border: 2px solid rgba(255, 255, 255, 0.3);
@@ -190,39 +204,111 @@ body {
 }
 
 /* Xbox header tabs (visual only) */
-/* Xbox header tabs (visual only) */
 .x-tabs {
   position: absolute;
-  top: 300px; /* Changed from 22px to move it down closer to the windows */
+  top: clamp(22px, 25vh, 300px);
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 66px;
+  gap: clamp(18px, 4vw, 66px);
   text-transform: lowercase;
   font-family: Segoe UI, system-ui, sans-serif;
-  font-size: 22px;
+  font-size: clamp(16px, 3vw, 22px);
   line-height: 1;
   letter-spacing: 0.5px;
-  color: #c9c9c9;           /* greyed out */
+  color: #c9c9c9;
   opacity: 0.9;
   user-select: none;
-  pointer-events: none;     /* non-interactive */
-  z-index: 20;              /* above bg, below overlays */
+  pointer-events: none;
+  z-index: 20;
   text-shadow: 0 1px 0 rgba(255,255,255,0.05),
                0 1px 4px rgba(0,0,0,0.25);
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
 }
 
 .x-tabs .active {
-  color: #ffffff;           /* white 'home' */
+  color: #ffffff;
   font-weight: 700;
   text-shadow: 0 1px 0 rgba(255,255,255,0.25),
                0 2px 6px rgba(0,0,0,0.35);
 }
 
-/* keep centered on small screens – scale down a touch */
-@media (max-width: 900px) {
-  .x-tabs { transform: translateX(-50%) scale(0.9); }
+.xbox-logo {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: clamp(40px, 10vw, 60px);
+  height: clamp(40px, 10vw, 60px);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  transition: transform 0.2s ease;
 }
-@media (max-width: 700px) {
-  .x-tabs { transform: translateX(-50%) scale(0.8); gap: 18px; font-size: 16px; }
+
+.xbox-logo:hover {
+  transform: scale(1.05);
+}
+
+.xbox-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dash {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    height: 60vh;
+    max-height: 400px;
+  }
+  
+  .centerBig {
+    grid-column: 1 / span 2;
+    grid-row: 3;
+  }
+  
+  .x-tabs {
+    top: 10px;
+    gap: 12px;
+  }
+  
+  .xbox-profile, .xbox-logo {
+    width: 40px;
+    height: 40px;
+    top: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dash {
+    gap: 8px;
+    height: 70vh;
+  }
+  
+  .tileText {
+    font-size: 24px;
+  }
+  
+  .tileText.small {
+    font-size: 14px;
+  }
+  
+  .x-tabs {
+    font-size: 14px;
+    gap: 8px;
+    top: 100px;
+  }
+  
+  .xbox-profile, .xbox-logo {
+    width: 32px;
+    height: 32px;
+  }
 }

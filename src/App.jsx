@@ -182,6 +182,14 @@ function XboxHeader() {
   );
 }
 
+function XboxLogo() {
+  return (
+    <div className="xbox-logo">
+      <img src="/xbox.svg" alt="Xbox Logo" />
+    </div>
+  );
+}
+
 export default function App() {
   const [showStartup, setShowStartup] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
@@ -224,6 +232,7 @@ export default function App() {
         <div className="screen">
           <XboxHeader />
           <AnimatedBackground />
+          <XboxLogo />
           <XboxProfile />
           <div className="dash">
             <Tile className="leftTop" href={LINKS.x}>
