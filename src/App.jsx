@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import * as THREE from "three";
 
-const CONTRACT = "Soon"; // replace with your real CA
+const CONTRACT = "Soon"; 
 
 const LINKS = {
-  x: "https://x.com",
+  x: "https://x.com/GamerPicSOL",
   dexscreener: `https://dexscreener.com/solana/${CONTRACT}`,
   pumpfun: `https://pump.fun/coin/${CONTRACT}`,
   gamerpics: "https://xboxgamer.pics/",
